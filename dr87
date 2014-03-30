@@ -17,7 +17,7 @@ export ccache=scripts
 export CCACHE_DIR=/home/dr87/ccache
 export loki=$SERV/87kernel/tmp
 export ARCH=arm
-export PATH=${PATH}:$SERV/4.6/bin/
+export PATH=${PATH}:$SERV/toolchains/4.7/bin/
 export CROSS_COMPILE=arm-eabi-
 ramdisk=ramdisk
 
@@ -40,7 +40,7 @@ case "$CHOICE" in
          config=d800_defconfig
          break;;
     "d801")
-         config=d801_defconfig
+         config=d801s_defconfig
          break;;
     "d802")
          config=d802_defconfig
@@ -106,8 +106,7 @@ then
 	mkdir -p $KERN/out/boot
 	mv $KERN/out/zImage $KERN/out/boot
 	cp scripts/mkbootimg $KERN/out/boot
-	./scripts/mkbootfs $ramdisk | gzip > ramdisk.gz
-	mv ramdisk.gz $KERN/out/boot
+	cp $ramdisk/ramdisk.cpio.lz4 $KERN/out/boot
 	./scripts/dtbTool -s 2048 -o $KERN/out/boot/dt.img $KERN/out/kernel/arch/arm/boot/
 	cd $KERN/out/boot
 
@@ -117,7 +116,7 @@ then
 	cmd_line="console=ttyHSL0,115200,n8 androidboot.hardware=g2 user_debug=31 msm_rtb.filter=0x0 mdss_mdp.panel=1:dsi:0:qcom,mdss_dsi_g2_lgd_cmd"
 
 	echo "--- Creating boot.img ---"
-	./mkbootimg --kernel zImage --ramdisk ramdisk.gz --cmdline "$cmd_line" --base $base --offset $offset --tags-addr $tags_addr --pagesize 2048 --dt dt.img -o newboot.img
+	./mkbootimg --kernel zImage --ramdisk ramdisk.cpio.lz4 --cmdline "$cmd_line" --base $base --offset $offset --tags-addr $tags_addr --pagesize 2048 --dt dt.img -o newboot.img
 	cd ../..
 	mv $KERN/out/boot/newboot.img out/boot.img
 	rm -rf $KERN/out/boot
@@ -148,7 +147,7 @@ fi
 	mv ../d800-$STATE-$version.zip $SERV
         touch $SERV/87kernel/1
 
-  elif  [ $config = "d801_defconfig" ]; then
+  elif  [ $config = "d801s_defconfig" ]; then
 	mv out/boot.img $PACKAGEDIR
 
 	echo "Import of META-INF"
