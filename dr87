@@ -37,22 +37,22 @@ select CHOICE in d800 d801 d802 d803 ls980 vs980
 do
 case "$CHOICE" in
     "d800")
-         config=d800_defconfig
+         config=d800s_defconfig
          break;;
     "d801")
          config=d801s_defconfig
          break;;
     "d802")
-         config=d802_defconfig
+         config=d802s_defconfig
          break;;
     "d803")
-         config=d803_defconfig
+         config=d803s_defconfig
          break;;
     "ls980")
-         config=ls980_defconfig
+         config=ls980s_defconfig
          break;;
     "vs980")
-         config=vs980_defconfig
+         config=vs980s_defconfig
          break;;
   esac
 done
@@ -127,7 +127,7 @@ fi
 
         cd $KERN
   	export curdate=`date "+%m-%d-%Y"`
-  if    [ $config = "d800_defconfig" ]; then
+  if    [ $config = "d800s_defconfig" ]; then
 
 	mv out/boot.img $PACKAGEDIR
 
@@ -171,7 +171,7 @@ fi
            touch $SERV/87kernel/2
         fi
 
-  elif [ $config = "d802_defconfig" ]; then
+  elif [ $config = "d802s_defconfig" ]; then
 
 	mv out/boot.img $PACKAGEDIR
 
@@ -195,7 +195,7 @@ fi
           touch $SERV/87kernel/3
         fi
 
-  elif [ $config = "d803_defconfig" ]; then
+  elif [ $config = "d803s_defconfig" ]; then
 
 	mv out/boot.img $PACKAGEDIR
 
@@ -219,7 +219,7 @@ fi
           touch $SERV/87kernel/4
         fi
 
-  elif [ $config = "ls980_defconfig" ]; then
+  elif [ $config = "ls980s_defconfig" ]; then
 
 	mv out/boot.img $PACKAGEDIR
 
@@ -243,7 +243,7 @@ fi
           touch $SERV/87kernel/5
         fi
 
-  elif [ $config = "vs980_defconfig" ]; then
+  elif [ $config = "vs980s_defconfig" ]; then
 	mv out/boot.img $PACKAGEDIR
 
 	echo "Import of META-INF"
