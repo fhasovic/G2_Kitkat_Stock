@@ -1,4 +1,4 @@
-=if ARCH_MSM
+if ARCH_MSM
 
 menu "MSM SoC Type"
 
@@ -1945,12 +1945,6 @@ config MSM_AVS_HW
 	  AVS hardware blocks associated with each Qualcomm ARMv7 cores can
 	  fine tune the voltages based on the feedback from the ring
 	  oscillators.
-
-config CPU_OVERCLOCK
-	bool "Enable CPU Overclocking option"
-	default n
-	help
-	  Krait overclocking up to 2.5 GHz
 
 config MSM_HW3D
 	tristate "MSM Hardware 3D Register Driver"
