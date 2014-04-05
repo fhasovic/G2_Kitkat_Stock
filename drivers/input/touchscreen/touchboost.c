@@ -208,7 +208,6 @@ static struct input_handler boost_input_handler = {
 
 static int init(void)
 {
-	int valid;
 	input_boost_wq = alloc_workqueue("input_boost_wq", WQ_FREEZABLE | WQ_HIGHPRI, 1);
 
 	if (!input_boost_wq)
@@ -218,7 +217,7 @@ static int init(void)
 	INIT_DELAYED_WORK(&rem_input_boost, do_rem_input_boost);
 	INIT_WORK(&touchboost_inputopen.inputopen_work, boost_input_open);
 
-	valid = input_register_handler(&boost_input_handler);
+	input_register_handler(&boost_input_handler);
 
 	cpufreq_register_notifier(&boost_adjust_nb, CPUFREQ_POLICY_NOTIFIER);
 
